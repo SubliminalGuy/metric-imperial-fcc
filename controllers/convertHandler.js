@@ -1,26 +1,44 @@
 function ConvertHandler() {
+
+  const unitTable = {
+    'gal': 'L',
+    'l': 'gal',
+    'mi': 'km',
+    'km': 'mi',
+    'lbs': 'kg',
+    'kg': 'lbs'
+  };
+
+  const spellOutTable = {
+    'gal': 'gallons',
+    'l': 'liters',
+    'mi': 'miles',
+    'km': 'kilometers',
+    'lbs': 'pounds',
+    'kg': 'kilograms'
+  };
   
   this.getNum = function(input) {
-    let result;
-    
+    let regex = /\d+([./]\d+)?([./]\d+)*/
+    let result = input.match(regex)[0]
     return result;
   };
   
   this.getUnit = function(input) {
-    let result;
-    
+    let regex = /[a-z]+/i
+    let result = input.match(regex)[0]
     return result;
   };
   
   this.getReturnUnit = function(initUnit) {
-    let result;
-    
+    let submittedUnit = this.getUnit(initUnit.toLowerCase());
+
+    let result = unitTable[submittedUnit];
     return result;
   };
 
   this.spellOutUnit = function(unit) {
-    let result;
-    
+    let result = spellOutTable[unit.toLowerCase()];
     return result;
   };
   
@@ -42,3 +60,4 @@ function ConvertHandler() {
 }
 
 module.exports = ConvertHandler;
+
